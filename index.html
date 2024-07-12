@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tarea</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="uno">
+      <h4>Estatura</h4>
+      <p>en centrímetros</p>
+      <input type="number" id="estatura">
+      <h4>Peso</h4>
+      <p>en kilogramos</p>
+      <input type="number" id="peso">
+      <button id="calcular">Calcular</button>
+    </div>
+    <div class="dos">
+      <p>Resultado: <input type="text" id="resultado" readonly><span id="IMC"></span></p>
+    </div>
+  </div>
+
+  <div class="">
+    <h1>Currency Converter</h1>
+      <div class="form-group">
+        <label for="fromCurrency">From Currency:</label>
+        <select id="fromCurrency">
+          <option value="ARS">ARS</option>
+          <option value="COP">COP</option>
+          <option value="MXN">MXN</option>
+          <option value="USD">USD</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="toCurrency">To Currency:</label>
+        <select id="toCurrency">
+          <option value="ARS">ARS</option>
+          <option value="COP">COP</option>
+          <option value="MXN">MXN</option>
+          <option value="USD" selected>USD</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="amount">Amount:</label>
+        <input type="number" id="amount" placeholder="Enter amount" value="1">
+      </div>
+      <div class="result">
+        <p>Converted Amount: <span id="convertedAmount">0</span></p>
+      </div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

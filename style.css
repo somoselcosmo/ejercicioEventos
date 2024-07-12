@@ -1,0 +1,71 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: rgba(81, 76, 76, 0.53);
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  height: auto;
+
+}
+
+.uno {
+  width: 30%;
+  border: solid 2px black;
+  padding: 14px;
+}
+
+.dos {
+  display: flex;
+  width: 70%;
+  border: solid 2px black;
+  height: 100px;
+  align-items: center;
+}
+
+#resultado {
+  font-weight: bold;
+
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+select,
+input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.result {
+  margin-top: 20px;
+}
+
+#convertedAmount {
+  font-weight: bold;
+}

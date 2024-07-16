@@ -10,7 +10,7 @@ let calcularIMC = () => {
 };
 let clasificarIMC = (imc) => {
   if (imc < 18.5) {
-    return 'bajo Peso';
+    return 'bajo peso';
   } else if (imc >= 18.5 && imc < 25) {
     return 'peso adecuado';
   } else {
@@ -54,17 +54,17 @@ const exchangeRates = {
 };
 
 let convertCurrency = () => {
-  const fromCurrency = document.getElementById('fromCurrency').value;
-  const toCurrency = document.getElementById('toCurrency').value;
-  const amount = parseFloat(document.getElementById('amount').value);
+  let fromCurrency = document.getElementById('fromCurrency').value;
+  let toCurrency = document.getElementById('toCurrency').value;
+  let amount = parseFloat(document.getElementById('amount').value);
 
   if (isNaN(amount) || amount <= 0) {
     document.getElementById('convertedAmount').textContent = 'Invalid amount';
     return;
   }
 
-  const conversionRate = exchangeRates[fromCurrency][toCurrency];
-  const convertedAmount = (amount * conversionRate).toFixed(2);
+  let conversionRate = exchangeRates[fromCurrency][toCurrency];
+  let convertedAmount = (amount * conversionRate).toFixed(2);
   document.getElementById('convertedAmount').textContent = convertedAmount;
 };
 
@@ -90,8 +90,104 @@ let listaNotas = [
 ];
 
 let idGlobal = 2;
+pintarNotas(listaNotas);
 
-const contenedorNotas = document.getElementById('listaNotas');
+function pintarNotas(listaNotas) {
+  let contenedorNotas = document.getElementById('listaNotas');
+  let mensajeSinNotas = document.getElementById('mensaje-sin-notas');
+
+  for (let i = 0; i < listaNotas.length; i++) {
+    let nota = document.createElement('div');
+    nota.classList.add('nota');
+    nota.innerHTML = `
+    <div class="realizadaa">
+      <input onclick="marcarRealizada(${listaNotas[i].id})" type="checkbox" class="realizada" ${listaNotas[i].realizada ? 'checked' : ''}>
+      <p>Marcar como realizada</p>
+    </div>
+    <div class="resto">
+      <h3>${listaNotas[i].titulo}</h3>
+      <p>${listaNotas[i].texto}</p>
+      <button class="eliminar" onclick="borrarNota(${listaNotas[i].id})">Borrar nota</button>
+    </div>
+    `;
+    contenedorNotas.appendChild(nota);
+  }
+}
+if (listaNotas.length === 0) {
+  mensajeSinNotas.classList.remove('oculto');
+}
+
+function crearNota() {
+  let nota = {
+    id: ++idGlobal,
+    titulo: Titulo.value,
+    texto: Contenido.value,
+    realizada: false
+  };
+  listaNotas.push(nota);
+  pintarNotas(listaNotas);
+}
+
+function marcarRealizada (id) {
+  for (let i = 0; i < listaNotas.length; i++) {
+    if (listaNotas[i].id === id) {
+      if (listaNotas[i].realizada) {
+        listaNotas[i].realizada = false;
+      } else {
+        listaNotas[i].realizada = true;
+      }
+    }
+  }
+  console.log(listaNotas);
+}
+
+let Titulo = document.getElementById('nota-titulo');
+let Contenido = document.getElementById('nota-contenido');
+let botonCrearNota = document.getElementById('crearNota');
+let botonLimpiar = document.getElementById('limpiar');
+let contenedorNotas = document.getElementById('listaNotas');
+
+function borrarNota(id) {
+  for (let i = 0; i < listaNotas.length; i++) {
+    if (listaNotas[i].id === id) {
+      listaNotas.splice(i, 1);
+    }
+  }
+  contenedorNotas.innerHTML = '';
+  pintarNotas(listaNotas);
+}
+
+botonLimpiar.addEventListener('click', () => {
+  Titulo.value = '';
+  Contenido.value = '';
+});
+
+
+  contenedorNotas.innerHTML = '';
+  pintarNotas(listaNotas);
+
+
+botonCrearNota.addEventListener('click', () => {
+  let titulo = Titulo.value.trim();
+  let contenido = Contenido.value.trim();
+
+  if (titulo && contenido) {
+    let nuevaNota = {
+      id: ++idGlobal,
+      titulo: titulo,
+      texto: contenido,
+      realizada: false
+    };
+    listaNotas.push(nuevaNota);
+  } contenedorNotas.innerHTML = '';
+  pintarNotas(listaNotas);
+  Titulo.value = '';
+  Contenido.value = '';
+  
+});
+
+
+/* const contenedorNotas = document.getElementById('listaNotas');
 
 function crearNotaHTML(nota) {
   let estiloTachado = nota.realizada ? 'text-decoration: line-through;' : ''; 
@@ -157,12 +253,12 @@ function pintarNotas() {
   contenedorNotas.innerHTML = '';
 
   if (listaNotas.length === 0) {
-    const mensajeSinNotas = document.createElement('p');
+    let mensajeSinNotas = document.createElement('p');
     mensajeSinNotas.textContent = 'NO HAY NOTAS PARA MOSTRAR';
     contenedorNotas.appendChild(mensajeSinNotas);
   } else {
     listaNotas.forEach(nota => {
-      const divNota = crearNotaHTML(nota);
+      let divNota = crearNotaHTML(nota);
       contenedorNotas.appendChild(divNota);
     });
   }
@@ -174,7 +270,6 @@ function borrarNota(id) {
   if (indiceNota !== -1) {
     listaNotas.splice(indiceNota, 1);
 
-    // Volver a pintar las notas
     pintarNotas();
   } else {
     console.error('Nota con ID no encontrada:', id);
@@ -190,46 +285,6 @@ function marcarRealizada(id) {
     console.error('Nota con ID no encontrada:', id);
   }
 }
-
-pintarNotas();
-
-
-/* 
-let agregarNota = (titulo, texto) => {
-  let nuevaNota = {
-    id: ++idGlobal,
-    titulo,
-    texto,
-    realizada: false
-  };
-  listaNotas.push(nuevaNota);
-  crearNotaHTML(nuevaNota);
-  document.getElementById('idNota').value = '';
-  document.getElementById('idTexto').value = '';
-};
-
-document.getElementById('crearNota').addEventListener('click', () => {
-  let titulo = document.getElementById('idNota').value;
-  let texto = document.getElementById('idTexto').value;
-  if (titulo.trim() !== '' && texto.trim() !== '') {
-    agregarNota(titulo, texto);
-    pintarNotas();
-  }
-});
-
-let borrarNota = (id) => {
-  listaNotas = listaNotas.filter(nota => nota.id !== id);
-  pintarNotas();
-};
-
-let pintarNotas = () => {
-  document.getElementById('todasLasNotas').innerHTML = '';
-  if (listaNotas.length === 0) {
-    document.getElementById('todasLasNotas').innerHTML = '<p>NO HAY NOTAS PARA MOSTRAR</p>';
-  } else {
-    listaNotas.forEach(crearNotaHTML);
-  }
-};
 
 pintarNotas();
 

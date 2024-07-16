@@ -9,6 +9,7 @@
 <body>
   <div class="container">
     <div class="uno">
+      <div class="conten">
       <h4>Estatura</h4>
       <p>en centrímetros</p>
       <input type="number" id="estatura">
@@ -17,12 +18,13 @@
       <input type="number" id="peso">
       <button id="calcular">Calcular</button>
     </div>
+    </div>
     <div class="dos">
       <p>Resultado: <input type="text" id="resultado" readonly><span id="IMC"></span></p>
     </div>
   </div>
 
-  <div class="">
+  <div class="contenedor">
     <h1>Currency Converter</h1>
       <div class="form-group">
         <label for="fromCurrency">From Currency:</label>
@@ -51,18 +53,21 @@
       </div>
   </div>
   <div>
-    <div class="container">
+    <div class="container2">
       <h1>Aplicación de Notas</h1>
       <div class="notasContainer">
         <div class="notas">
           <input type="text" id="nota-titulo" placeholder="Título de la nota" />
-          <textarea id="nota-contenido" placeholder="Contenido de la nota"></textarea>
+          <textarea id="nota-contenido" rows="7" cols="60"  placeholder="Contenido de la nota"></textarea>
           <div class="botones">
-            <button id="crearNota">Crear Nota</button>
+            <button id="crearNota">Crear nota</button>
             <button id="limpiar">Limpiar nota</button>
           </div>
         </div>
+        
         <div id="listaNotas">
+          <div id="mensaje-sin-notas" class="mensaje oculto">No hay notas para mostrar</div>
+
     
         </div>
       </div>

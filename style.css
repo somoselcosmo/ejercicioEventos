@@ -11,21 +11,50 @@ body {
   display: flex;
   align-items: center;
   height: auto;
+}
 
+.contenedor {
+  padding: 0px 20vh;
+}
+
+.container2 {
+  margin-top: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: auto;
+}
+
+.conten {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.conten p {
+  margin-bottom: 10px;
+}
+
+.conten button {
+  margin-top: 10px;
 }
 
 .uno {
-  width: 30%;
-  border: solid 2px black;
+  height: auto;
+  align-items: center;
+  width: 28%;
   padding: 14px;
+  margin: 14px
 }
 
 .dos {
   display: flex;
   width: 70%;
-  border: solid 2px black;
-  height: 100px;
+  height: auto;
   align-items: center;
+  padding-left: 40px;
 }
 
 #resultado {
@@ -38,8 +67,9 @@ h1 {
   margin-bottom: 20px;
 }
 
-.form-group {
-  margin-bottom: 15px;
+.form-group label {
+  margin-top: 15px;
+  font-weight: bold;
 }
 
 label {
@@ -68,4 +98,106 @@ button {
 
 #convertedAmount {
   font-weight: bold;
+}
+
+#resultado {
+  margin-bottom: 29px;
+}
+
+#IMC {
+  font-weight: bold;
+}
+
+.botones {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin-top: 20px;
+}
+
+#limpiar {
+  background-color: rgba(141, 136, 136, 0.548);
+}
+
+.hidden {
+  display: hidden;
+}
+
+.notas {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 96%;
+}
+
+.nota {
+  background-color: #3e59754c;
+  margin-top: 40px;
+  width: 50%;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: auto;
+  min-height: 200px;
+  height: auto;
+}
+
+#nota-titulo {
+  margin-bottom: 10px;
+  max-width: 440px;
+}
+
+.hid {
+  display: none;
+}
+
+.realizadaa {
+  margin-bottom: 10px;
+  display: flex;
+}
+
+.realizadaa input {
+  width: 40px;
+}
+
+.realizadaa p {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.resto {
+  display: flex;
+  flex-direction: column;
+}
+
+.resto h3 {
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.resto p {
+  text-align: start;
+}
+
+#listaNotas {
+  margin: 30px;
+  display: flex;
+  gap: 20px;
+}
+
+.mensaje .oculto {
+  display: none;
+}
+
+.mensaje {
+  display: block;
+  text-align: center;
+}
+
+.eliminar {
+  background-color: rgba(188, 16, 16, 0.74);
+  margin-top: 20px;
 }

@@ -188,13 +188,28 @@ button {
   gap: 20px;
 }
 
-.mensaje .oculto {
+.mensaje {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.oculto {
   display: none;
 }
 
-.mensaje {
-  display: block;
-  text-align: center;
+.tachado {
+  text-decoration: line-through;
+}
+
+.busqueda {
+  margin-bottom: 20px;
+}
+
+.busqueda input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
 .eliminar {

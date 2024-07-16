@@ -113,20 +113,7 @@ function pintarNotas(listaNotas) {
     contenedorNotas.appendChild(nota);
   }
 }
-if (listaNotas.length === 0) {
-  mensajeSinNotas.classList.remove('oculto');
-}
 
-function crearNota() {
-  let nota = {
-    id: ++idGlobal,
-    titulo: Titulo.value,
-    texto: Contenido.value,
-    realizada: false
-  };
-  listaNotas.push(nota);
-  pintarNotas(listaNotas);
-}
 
 function marcarRealizada (id) {
   for (let i = 0; i < listaNotas.length; i++) {
@@ -186,107 +173,19 @@ botonCrearNota.addEventListener('click', () => {
   
 });
 
+let busqueda = document.getElementById('busqueda');
 
-/* const contenedorNotas = document.getElementById('listaNotas');
+function buscarNota() {
+  let textoBusqueda = busqueda.value.trim().toLowerCase();
+  let notasFiltradas = [];
 
-function crearNotaHTML(nota) {
-  let estiloTachado = nota.realizada ? 'text-decoration: line-through;' : ''; 
-  const templateHTML = `
-    <div class="nota">
-      <input type="checkbox" class="realizada" ${nota.realizada ? 'checked' : ''}><h3>${nota.titulo}</h3>
-      <p>${nota.texto}</p>
-      <button class="eliminar" onclick="borrarNota(${nota.id})">Borrar nota</button>
-    </div>
-  `;
-  const divNota = document.createElement('div');
-  divNota.innerHTML = templateHTML;
-
-  return divNota;
-}
-listaNotas.forEach(nota => {
-  const divNota = crearNotaHTML(nota);
-  contenedorNotas.appendChild(divNota);
-});
-
-const botonCrearNota = document.getElementById('crearNota');
-const inputTitulo = document.getElementById('nota-titulo');
-const textareaContenido = document.getElementById('nota-contenido');
-
-botonCrearNota.addEventListener('click', () => {
-  const titulo = inputTitulo.value;
-  const contenido = textareaContenido.value;
-
-  if (titulo && contenido) {
-    const nuevaNota = {
-      id: ++idGlobal,
-      titulo,
-      contenido,
-      realizada: false
-    };
-
-    listaNotas.push(nuevaNota);
-
-    const divNota = crearNotaHTML(nuevaNota);
-    contenedorNotas.appendChild(divNota);
-
-   
-    inputTitulo.value = '';
-    textareaContenido.value = '';
-  } else {
-    alert('Debes completar el título y el contenido de la nota');
+  for (let i = 0; i < listaNotas.length; i++) {
+    if (listaNotas[i].titulo.toLowerCase().includes(textoBusqueda) || listaNotas[i].texto.toLowerCase().includes(textoBusqueda)) {
+      notasFiltradas.push(listaNotas[i]);
+    }
   }
-});
 
-const botonLimpiar = document.getElementById('limpiar');
-
-botonLimpiar.addEventListener('click', () => {
-  const botonLimpiar = document.getElementById('limpiar');
-
-botonLimpiar.addEventListener('click', () => {
-  inputTitulo.value = '';
-  textareaContenido.value = '';
-});
-
-});
-
-function pintarNotas() {
-  contenedorNotas.innerHTML = '';
-
-  if (listaNotas.length === 0) {
-    let mensajeSinNotas = document.createElement('p');
-    mensajeSinNotas.textContent = 'NO HAY NOTAS PARA MOSTRAR';
-    contenedorNotas.appendChild(mensajeSinNotas);
-  } else {
-    listaNotas.forEach(nota => {
-      let divNota = crearNotaHTML(nota);
-      contenedorNotas.appendChild(divNota);
-    });
-  }
+  pintarNotas(notasFiltradas);
 }
 
-function borrarNota(id) {
-  const indiceNota = listaNotas.findIndex(nota => nota.id === id);
-
-  if (indiceNota !== -1) {
-    listaNotas.splice(indiceNota, 1);
-
-    pintarNotas();
-  } else {
-    console.error('Nota con ID no encontrada:', id);
-  }
-};
-function marcarRealizada(id) {
-  const indiceNota = listaNotas.findIndex(nota => nota.id === id);
-
-  if (indiceNota !== -1) {
-    listaNotas[indiceNota].realizada = !listaNotas[indiceNota].realizada; // Invertir el valor de 'realizada'
-    pintarNotas();
-  } else {
-    console.error('Nota con ID no encontrada:', id);
-  }
-}
-
-pintarNotas();
-
-
- */
+busqueda.addEventListener('input', notasFiltradas);

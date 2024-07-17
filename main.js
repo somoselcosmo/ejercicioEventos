@@ -89,103 +89,163 @@ let listaNotas = [
   }
 ];
 
-let idGlobal = 2;
-pintarNotas(listaNotas);
+let idGlobal = listaNotas.reduce((maxId, nota) => Math.max(maxId, nota.id), 0);
 
-function pintarNotas(listaNotas) {
+document.getElementById('filtroRealizado').addEventListener('change', function() {
+  let texto = document.getElementById('filtroTexto').value;
+  let notasFiltradas = filtrarNotasPorTexto(listaNotas, texto);
+  agregarNotas(notasFiltradas, this.checked);
   let contenedorNotas = document.getElementById('listaNotas');
-  let mensajeSinNotas = document.getElementById('mensaje-sin-notas');
-
-  for (let i = 0; i < listaNotas.length; i++) {
-    let nota = document.createElement('div');
-    nota.classList.add('nota');
-    nota.innerHTML = `
-    <div class="realizadaa">
-      <input onclick="marcarRealizada(${listaNotas[i].id})" type="checkbox" class="realizada" ${listaNotas[i].realizada ? 'checked' : ''}>
-      <p>Marcar como realizada</p>
-    </div>
-    <div class="resto">
-      <h3>${listaNotas[i].titulo}</h3>
-      <p>${listaNotas[i].texto}</p>
-      <button class="eliminar" onclick="borrarNota(${listaNotas[i].id})">Borrar nota</button>
-    </div>
-    `;
-    contenedorNotas.appendChild(nota);
-  }
-}
-
-
-function marcarRealizada (id) {
-  for (let i = 0; i < listaNotas.length; i++) {
-    if (listaNotas[i].id === id) {
-      if (listaNotas[i].realizada) {
-        listaNotas[i].realizada = false;
-      } else {
-        listaNotas[i].realizada = true;
-      }
-    }
-  }
-  console.log(listaNotas);
-}
-
-let Titulo = document.getElementById('nota-titulo');
-let Contenido = document.getElementById('nota-contenido');
-let botonCrearNota = document.getElementById('crearNota');
-let botonLimpiar = document.getElementById('limpiar');
-let contenedorNotas = document.getElementById('listaNotas');
-
-function borrarNota(id) {
-  for (let i = 0; i < listaNotas.length; i++) {
-    if (listaNotas[i].id === id) {
-      listaNotas.splice(i, 1);
-    }
-  }
   contenedorNotas.innerHTML = '';
-  pintarNotas(listaNotas);
-}
 
-botonLimpiar.addEventListener('click', () => {
-  Titulo.value = '';
-  Contenido.value = '';
-});
-
-
-  contenedorNotas.innerHTML = '';
-  pintarNotas(listaNotas);
-
-
-botonCrearNota.addEventListener('click', () => {
-  let titulo = Titulo.value.trim();
-  let contenido = Contenido.value.trim();
-
-  if (titulo && contenido) {
-    let nuevaNota = {
-      id: ++idGlobal,
-      titulo: titulo,
-      texto: contenido,
-      realizada: false
-    };
-    listaNotas.push(nuevaNota);
-  } contenedorNotas.innerHTML = '';
-  pintarNotas(listaNotas);
-  Titulo.value = '';
-  Contenido.value = '';
+  let notasAMostrar = this.checked ? listaNotas.filter(nota => nota.realizada) : listaNotas;
   
+  notasAMostrar.forEach(nota => {
+    const tarjetaNota = document.createElement('div');
+    tarjetaNota.classList.add('tarjeta-nota');
+    const checkboxRealizada = document.createElement('input');
+    checkboxRealizada.type = 'checkbox';
+    checkboxRealizada.checked = nota.realizada;
+    checkboxRealizada.addEventListener('change', function() {
+      nota.realizada = this.checked;
+      agregarNotas();
+    });
+    tarjetaNota.appendChild(checkboxRealizada);
+    const tituloNota = document.createElement('h3');
+    tituloNota.textContent = nota.titulo;
+    tarjetaNota.appendChild(tituloNota);
+    const textoNota = document.createElement('p');
+    textoNota.textContent = nota.texto;
+    tarjetaNota.appendChild(textoNota);
+    contenedorNotas.appendChild(tarjetaNota);
+  
+    let botonBorrar = document.createElement('button');
+    botonBorrar.textContent = 'Borrar nota';
+    botonBorrar.classList.add('boton-borrar');
+    botonBorrar.setAttribute('onclick', `borrarNota(${nota.id})`);
+    tarjetaNota.appendChild(botonBorrar);
+      
+    contenedorNotas.appendChild(tarjetaNota);
+  });
 });
 
-let busqueda = document.getElementById('busqueda');
+function agregarNota(titulo, texto) {
+  idGlobal++;
+  const nuevaNota = {
+    id: idGlobal,
+    titulo: titulo,
+    texto: texto,
+    realizada: false
+  };
+  listaNotas.push(nuevaNota);
+  agregarNotas();
+};
 
-function buscarNota() {
-  let textoBusqueda = busqueda.value.trim().toLowerCase();
-  let notasFiltradas = [];
+function filtrarNotasPorTexto(notas, texto) {
+  if (!texto) {
+    return notas;
+  }
+  const textoBusqueda = texto.toLowerCase();
+  return notas.filter(nota => 
+    nota.titulo.toLowerCase().includes(textoBusqueda) || 
+    nota.texto.toLowerCase().includes(textoBusqueda)
+  );
+};
 
+document.getElementById('filtroTexto').addEventListener('input', function() {
+  const texto = this.value;
+  const notasFiltradas = filtrarNotasPorTexto(listaNotas, texto);
+  agregarNotas(notasFiltradas);
+});
+
+function agregarNotas() { 
+  const contenedorNotas = document.getElementById('listaNotas');
+  contenedorNotas.innerHTML = '';
+  let filtroRealizadoActivado = document.getElementById('filtroRealizado').checked;
+  let texto = document.getElementById('filtroTexto').value;
+  let notasFiltradas = filtrarNotasPorTexto(listaNotas, texto);
+  let notasAMostrar = filtroRealizadoActivado ? notasFiltradas.filter(nota => nota.realizada) : notasFiltradas;
+
+  if (notasAMostrar.length === 0) {
+    let mensajeVacio = document.createElement('p');
+    mensajeVacio.textContent = 'NO HAY NOTAS PARA MOSTRAR';
+    mensajeVacio.classList.add('mensaje-vacio');
+    contenedorNotas.appendChild(mensajeVacio);
+  } else {
+    notasAMostrar.forEach(nota => {
+      const tarjetaNota = document.createElement('div');
+      tarjetaNota.classList.add('tarjeta-nota');
+
+      const checkboxRealizada = document.createElement('input');
+      checkboxRealizada.setAttribute('type', 'checkbox');
+      checkboxRealizada.classList.add('realizada');
+      checkboxRealizada.checked = nota.realizada;
+      checkboxRealizada.setAttribute('onclick', `marcarRealizada(${nota.id})`);
+      tarjetaNota.appendChild(checkboxRealizada);
+
+      const tituloNota = document.createElement('h3');
+      tituloNota.textContent = nota.titulo;
+      tarjetaNota.appendChild(tituloNota);
+  
+      const textoNota = document.createElement('p');
+      textoNota.textContent = nota.texto;
+      textoNota.style.textDecoration = nota.realizada ? 'line-through' : 'none';
+      tarjetaNota.appendChild(textoNota);
+  
+      let botonBorrar = document.createElement('button');
+      botonBorrar.textContent = 'Borrar nota';
+      botonBorrar.classList.add('boton-borrar');
+      botonBorrar.setAttribute('onclick', `borrarNota(${nota.id})`);
+      tarjetaNota.appendChild(botonBorrar);
+      
+      contenedorNotas.appendChild(tarjetaNota);
+    });
+  }
+}
+function marcarRealizada(id) {
   for (let i = 0; i < listaNotas.length; i++) {
-    if (listaNotas[i].titulo.toLowerCase().includes(textoBusqueda) || listaNotas[i].texto.toLowerCase().includes(textoBusqueda)) {
-      notasFiltradas.push(listaNotas[i]);
+    if (listaNotas[i].id === id) {
+      listaNotas[i].realizada = !listaNotas[i].realizada;
+      break;
     }
   }
-
-  pintarNotas(notasFiltradas);
+  agregarNotas(); 
+}
+function borrarNota(idNota) {
+  listaNotas = listaNotas.filter(nota => nota.id !== idNota);
+  agregarNotas();
 }
 
-busqueda.addEventListener('input', notasFiltradas);
+document.addEventListener('DOMContentLoaded', agregarNotas);
+
+function crearNuevaNota() {
+  const titulo = document.getElementById('nota-titulo').value;
+  const texto = document.getElementById('nota-contenido').value;
+
+  if (titulo.trim() === '' || texto.trim() === '') {
+    alert('Por favor, complete todos los campos para crear una nota.');
+    return;
+  }
+
+  agregarNota(titulo, texto);
+
+  document.getElementById('nota-titulo').value = '';
+  document.getElementById('nota-contenido').value = '';
+  agregarNotas();
+}
+
+function limpiarCampos() {
+  document.getElementById('nota-titulo').value = '';
+  document.getElementById('nota-contenido').value = '';
+}
+
+document.getElementById('crearNota').addEventListener('click', crearNuevaNota);
+document.getElementById('filtroTexto').addEventListener('input', agregarNotas);
+document.getElementById('filtroRealizado').addEventListener('change', agregarNotas);
+document.getElementById('limpiar').addEventListener('click', limpiarCampos);
+
+document.getElementById('filtroRealizado').addEventListener('change', function() {
+  let texto = document.getElementById('filtroTexto').value;
+  let notasFiltradas = filtrarNotasPorTexto(listaNotas, texto);
+  agregarNotas(notasFiltradas, this.checked);
+});

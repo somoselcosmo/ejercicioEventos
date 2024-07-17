@@ -1,75 +1,69 @@
-* {
-  margin: 0;
-  padding: 0;
-}
-
+/* Estilos generales */
 body {
-  background-color: rgba(81, 76, 76, 0.53);
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 20px;
 }
 
-.container {
-  display: flex;
-  align-items: center;
-  height: auto;
-}
-
-.contenedor {
-  padding: 0px 20vh;
-}
-
+.container,
+.contenedor,
 .container2 {
-  margin-top: 80px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  height: auto;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+h1,
+h4 {
+  color: #333;
+}
+
+/* Estilos para la sección de cálculo de IMC */
+.uno {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 20px;
 }
 
 .conten {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 100%;
+  align-items: flex-start;
 }
 
-.conten p {
-  margin-bottom: 10px;
+.conten h4 {
+  font-weight: bold;
 }
 
-.conten button {
+
+input[type="number"] {
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: calc(100% - 22px);
+}
+
+button {
+  background-color: #5cb85c;
+  color: white;
+  border: none;
+  padding: 10px 20px;
   margin-top: 10px;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
-.uno {
-  height: auto;
-  align-items: center;
-  width: 28%;
-  padding: 14px;
-  margin: 14px
+button:hover {
+  background-color: #4cae4c;
 }
 
-.dos {
-  display: flex;
-  width: 70%;
-  height: auto;
-  align-items: center;
-  padding-left: 40px;
-}
-
-#resultado {
-  font-weight: bold;
-
-}
-
-h1 {
-  text-align: center;
+/* Estilos para la sección de conversión de moneda */
+.form-group {
   margin-bottom: 20px;
-}
-
-.form-group label {
-  margin-top: 15px;
-  font-weight: bold;
 }
 
 label {
@@ -78,141 +72,41 @@ label {
 }
 
 select,
-input {
+input[type="number"] {
   width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }
 
-button {
-  background-color: #007bff;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
+/* Estilos para la aplicación de notas */
+.notasContainer {
+  display: flex;
+  flex-direction: column;
 }
 
-.result {
-  margin-top: 20px;
-}
-
-#convertedAmount {
-  font-weight: bold;
-}
-
-#resultado {
-  margin-bottom: 29px;
-}
-
-#IMC {
-  font-weight: bold;
-}
-
+.busqueda,
+.notas,
 .botones {
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-  margin-top: 20px;
-}
-
-#limpiar {
-  background-color: rgba(141, 136, 136, 0.548);
-}
-
-.hidden {
-  display: hidden;
-}
-
-.notas {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 96%;
-}
-
-.nota {
-  background-color: #3e59754c;
-  margin-top: 40px;
-  width: 50%;
-  padding: 15px;
-  border-radius: 10px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  height: auto;
-  min-height: 200px;
-  height: auto;
-}
-
-#nota-titulo {
-  margin-bottom: 10px;
-  max-width: 440px;
-}
-
-.hid {
-  display: none;
-}
-
-.realizadaa {
-  margin-bottom: 10px;
-  display: flex;
-}
-
-.realizadaa input {
-  width: 40px;
-}
-
-.realizadaa p {
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-}
-
-.resto {
-  display: flex;
-  flex-direction: column;
-}
-
-.resto h3 {
-  margin-bottom: 10px;
-  text-align: center;
-}
-
-.resto p {
-  text-align: start;
-}
-
-#listaNotas {
-  margin: 30px;
-  display: flex;
-  gap: 20px;
-}
-
-.mensaje {
-  text-align: center;
-  margin-top: 20px;
-}
-
-.oculto {
-  display: none;
-}
-
-.tachado {
-  text-decoration: line-through;
-}
-
-.busqueda {
   margin-bottom: 20px;
 }
 
-.busqueda input {
+textarea {
   width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }
 
-.eliminar {
-  background-color: rgba(188, 16, 16, 0.74);
+#listaNotas {
   margin-top: 20px;
+}
+
+/* Media queries para responsividad */
+@media (max-width: 768px) {
+
+  .conten,
+  .notasContainer {
+    width: 100%;
+  }
 }

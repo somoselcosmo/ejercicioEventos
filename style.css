@@ -48,7 +48,7 @@ input[type="number"] {
 }
 
 button {
-  background-color: #5cb85c;
+  background-color: #0f0352;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -58,7 +58,7 @@ button {
 }
 
 button:hover {
-  background-color: #4cae4c;
+  background-color: #300f45;
 }
 
 /* Estilos para la sección de conversión de moneda */
@@ -86,6 +86,32 @@ input[type="number"] {
   flex-direction: column;
 }
 
+.busqueda {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.real {
+  display: flex;
+  justify-content: space-between;
+  width: 100px;
+  margin-bottom: 10px;
+
+}
+
+.real span {
+  font-size: 1.2rem;
+}
+
+#filtroTexto {
+  width: 50%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
 .busqueda,
 .notas,
 .botones {
@@ -98,8 +124,24 @@ textarea {
   border-radius: 4px;
 }
 
+.inputs {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+}
+
+#nota-titulo {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
 #listaNotas {
   margin-top: 20px;
+  width: 100%;
 }
 
 /* Media queries para responsividad */
@@ -109,4 +151,53 @@ textarea {
   .notasContainer {
     width: 100%;
   }
+}
+
+#listaNotas {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.tarjeta-nota {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 10px;
+  width: 100%;
+  margin-bottom: 10px;
+  min-height: 220px;
+  background-size: cover;
+
+}
+
+.tarjeta-nota label {
+  display: inline;
+  margin-left: 20px;
+  font-style: italic;
+}
+
+.tarjeta-nota h3 {
+  margin-top: 20px;
+}
+
+#limpiar {
+  background-color: #5b4ea8;
+}
+
+#limpiar:hover {
+  background-color: #5b4ea84a;
+}
+
+.boton-borrar {
+  background-color: #ca1111;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.boton-borrar:hover {
+  background-color: #5d1313;
 }

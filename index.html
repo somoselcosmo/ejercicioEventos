@@ -59,26 +59,32 @@
       <div class="notasContainer">
         <div class="busqueda">
           <input type="text" id="filtroTexto" placeholder="Buscar nota...">
+          <div class="real">
           <label class="switch" for="filtroTexto">
             <input type="checkbox" id="filtroRealizado">
             <span class="slider round"></span>
           </label>
-          <span>Realizadas</span>
+          <span> Realizadas</span>
+        </div>
         </div>
         <div class="notas">
+          <div class="inputs">
           <input type="text" id="nota-titulo" placeholder="Título de la nota" />
           <textarea id="nota-contenido" rows="7" cols="60"  placeholder="Contenido de la nota"></textarea>
+        </div>
           <div class="botones">
             <button id="crearNota">Crear nota</button>
             <button id="limpiar">Limpiar nota</button>
           </div>
         </div>
         
-        <div id="listaNotas">
+        <div class="row">
+        <div id="listaNotas" class=" container-fluid col-12 col-md-6 col-lg-6">
           
 
     
         </div>
+      </div>
       </div>
     </div>
   </div>

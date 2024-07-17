@@ -179,9 +179,15 @@ function agregarNotas() {
       const checkboxRealizada = document.createElement('input');
       checkboxRealizada.setAttribute('type', 'checkbox');
       checkboxRealizada.classList.add('realizada');
+      checkboxRealizada.id = 'realizada-' + nota.id;
       checkboxRealizada.checked = nota.realizada;
       checkboxRealizada.setAttribute('onclick', `marcarRealizada(${nota.id})`);
       tarjetaNota.appendChild(checkboxRealizada);
+
+      const labelRealizada = document.createElement('label');
+      labelRealizada.setAttribute('for', 'realizada-' + nota.id);
+      labelRealizada.textContent = 'Marcar como realizada';
+      tarjetaNota.appendChild(labelRealizada);
 
       const tituloNota = document.createElement('h3');
       tituloNota.textContent = nota.titulo;
